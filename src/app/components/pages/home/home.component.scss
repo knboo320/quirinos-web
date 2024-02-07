@@ -1,0 +1,11 @@
+.sidebar {
+    width: 288px;
+    height: 100vh;
+
+    .filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #BFBFBF;
+    }
+}

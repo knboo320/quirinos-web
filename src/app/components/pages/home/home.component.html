@@ -1,0 +1,46 @@
+<app-header></app-header>
+<main>
+    <div class="sidebar">
+        <div class="filter">
+            Filtrar
+            <fa-icon [icon]="faCalendar"></fa-icon>
+        </div>
+        <details class="service-date">
+            <summary>Data</summary>
+            <input type="date" name="date-input" id="collapsible" placeholder="">
+        </details>
+        <details class="service-number">
+            <summary>Número do serviço</summary>
+            <input type="number" name="service-number-input" id="collapsible">
+        </details>
+        <details class="service-type">
+            <summary>Tipo do serviço</summary>
+            <input type="checkbox" name="eletricista" id="eletricista">
+            <label for="eletricista">Eletricista</label>
+
+            <input type="checkbox" name="hidraulica" id="hidraulica">
+            <label for="hidraulica">Hidráulica</label>
+
+            <input type="checkbox" name="entupimento" id="entupimento">
+            <label for="entupimento">Entupimento</label>
+
+            <input type="checkbox" name="vidraceiro" id="vidraceiro">
+            <label for="vidraceiro">Vidraceiro</label>
+
+            <input type="checkbox" name="vigilancia" id="vigilancia">
+            <label for="vigilancia">Vigilância</label>
+
+            <input type="checkbox" name="check-up" id="check-up">
+            <label for="check-up">Check-up</label>
+
+            <input type="checkbox" name="cobertura" id="cobertura">
+            <label for="cobertura">Cobertura Provisória</label>
+
+            <input type="checkbox" name="tapume" id="tapume">
+            <label for="tapume">Colocação de Tapume</label>
+            
+            <input type="checkbox" name="chaveiro" id="chaveiro">
+            <label for="chaveiro">Chaveiro</label>
+        </details>
+    </div>
+</main>

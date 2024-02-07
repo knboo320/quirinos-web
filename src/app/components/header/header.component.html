@@ -1,0 +1,22 @@
+<header>
+    <div class="left">
+        <div class="left-logo">
+            <img src="assets/logoQuirinos.png" alt="">
+        </div>
+        <div class="divider-bar"></div>
+        <div class="left-user">
+            <p>Boa tarde, <b>teste</b></p>
+            <p>Empresa: <b>teste</b></p>
+        </div>
+    </div>
+    <div class="right">
+        <button mat-button [matMenuTriggerFor]="user" id="profile-button">
+            Fulano de tal...
+            <fa-icon [icon]="faUser"></fa-icon>
+        </button>
+        <mat-menu #user="matMenu">
+            <button mat-menu-item>Configurações</button>
+            <button mat-menu-item>Sair</button>
+        </mat-menu>
+    </div>
+</header>
