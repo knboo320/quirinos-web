@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,7 @@ import { RegisterComponent } from './components/pages/register/register.componen
 import { NewPasswordComponent } from './components/pages/new-password/new-password.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceFormDialogComponent } from './components/service-form-dialog/service-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     NewPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    ServiceFormDialogComponent,
   ],
   imports: [
     MatMenuModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
