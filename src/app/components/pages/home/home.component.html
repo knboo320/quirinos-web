@@ -11,36 +11,62 @@
         </details>
         <details class="service-number">
             <summary>Número do serviço</summary>
-            <input type="number" name="service-number-input" id="collapsible">
+            <input type="number" name="service-number-input" id="collapsible" placeholder="Digite aqui...">
         </details>
         <details class="service-type">
             <summary>Tipo do serviço</summary>
-            <input type="checkbox" name="eletricista" id="eletricista">
-            <label for="eletricista">Eletricista</label>
+            <div class="service-row">
+                <input type="checkbox" name="eletricista" id="eletricista">
+                <label for="eletricista">Eletricista</label>
+            </div>
 
-            <input type="checkbox" name="hidraulica" id="hidraulica">
-            <label for="hidraulica">Hidráulica</label>
+            <div class="service-row">
+                <input type="checkbox" name="hidraulica" id="hidraulica">
+                <label for="hidraulica">Hidráulica</label>    
+            </div>
 
-            <input type="checkbox" name="entupimento" id="entupimento">
-            <label for="entupimento">Entupimento</label>
+            <div class="service-row">
+                <input type="checkbox" name="entupimento" id="entupimento">
+                <label for="entupimento">Entupimento</label>
+            </div>
 
-            <input type="checkbox" name="vidraceiro" id="vidraceiro">
-            <label for="vidraceiro">Vidraceiro</label>
+            <div class="service-row">
+                <input type="checkbox" name="vidraceiro" id="vidraceiro">
+                <label for="vidraceiro">Vidraceiro</label>
+            </div>
 
-            <input type="checkbox" name="vigilancia" id="vigilancia">
-            <label for="vigilancia">Vigilância</label>
+            <div class="service-row">
+                <input type="checkbox" name="vigilancia" id="vigilancia">
+                <label for="vigilancia">Vigilância</label>
+            </div>
 
-            <input type="checkbox" name="check-up" id="check-up">
-            <label for="check-up">Check-up</label>
+            <div class="service-row">
+                <input type="checkbox" name="check-up" id="check-up">
+                <label for="check-up">Check-up</label>
+            </div>
 
-            <input type="checkbox" name="cobertura" id="cobertura">
-            <label for="cobertura">Cobertura Provisória</label>
+            <div class="service-row">
+                <input type="checkbox" name="cobertura" id="cobertura">
+                <label for="cobertura">Cobertura Provisória</label>
+            </div>
 
-            <input type="checkbox" name="tapume" id="tapume">
-            <label for="tapume">Colocação de Tapume</label>
-            
-            <input type="checkbox" name="chaveiro" id="chaveiro">
-            <label for="chaveiro">Chaveiro</label>
+            <div class="service-row">
+                <input type="checkbox" name="tapume" id="tapume">
+                <label for="tapume">Colocação de Tapume</label>
+            </div>
+
+            <div class="service-row">
+                <input type="checkbox" name="chaveiro" id="chaveiro">
+                <label for="chaveiro">Chaveiro</label>
+            </div>
         </details>
+    </div>
+    <div class="services">
+        <h1 id="services-title">Registro de serviços:</h1>
+        <div class="services-options">
+            <a routerLink=""><button id="new-service">+ Novo serviço</button></a>
+            <a routerLink="/novo-funcionario"><button id="new-employee">Cadastrar funcionário</button></a>
+            <a routerLink="/renovar-senha"><button id="new-password">Renovar senha</button></a>
+        </div>
     </div>
 </main>

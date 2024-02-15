@@ -1,11 +1,105 @@
+@mixin sidebar_collapsible {
+    padding: 0.625rem;
+    height: 1.875rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+main {
+    display: flex;
+}
+
 .sidebar {
-    width: 288px;
+    width: 18.4375rem;
     height: 100vh;
+    border-right: 2px solid #BFBFBF;
 
     .filter {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: #BFBFBF;
+        @include sidebar_collapsible;
+    }
+
+    details {
+        @include sidebar_collapsible;
+        border-bottom: 2px solid #BFBFBF;
+        transition: border-width 0.3s;
+
+        summary {
+            cursor: pointer;
+        }
+
+        input {
+            margin-top: 10px;
+            border: 2px solid #BFBFBF;
+            border-radius: 10px;
+            width: 95%;
+            height: 23px;
+            padding: 5px;
+        }
+
+        &[open] {
+            height: 4.375rem;
+        }
+
+    }
+
+    details.service-type {
+
+        .service-row {
+            display: flex;
+            align-items: center;
+
+            input[type="checkbox"] {
+                width: 25px;
+                height: 25px;
+                margin: 20px 10px 20px 10px;
+                border: 2px solid #BFBFBF;
+            }
+        }
+
+        &[open] {
+            height: 100vh;
+        }
+    }
+}
+
+.services {
+
+    h1 {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 5px;
+        border: 2px solid #BFBFBF;
+        border-radius: 0 0 50px 0;
+        width: 35%;
+    }
+
+    .services-options {
+        display: flex;
+        gap: 20px;
+        margin: 30px;
+
+        a {
+            cursor: pointer;
+            border: 2px solid #000;
+            border-radius: 20px;
+            transition: transform .2s;
+
+            &:hover {
+                transform: scale(1.1);
+            }    
+
+            button {
+                cursor: pointer;
+                background: none;
+                font-size: 20px;
+                font-weight: 600;
+                border: none;
+                padding: 10px;
+            }
+        }
     }
 }
