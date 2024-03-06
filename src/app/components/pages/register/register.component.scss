@@ -1,9 +1,10 @@
 main {
-    gap: 524px;
+    gap: 32.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: linear-gradient(#687FF3, #2446FA);
+    height: 100vh;
 }
 
 .right {
@@ -24,6 +25,10 @@ main {
     form {
         display: flex;
         flex-direction: column;
+
+        #credentials {
+            width: 290px;
+        }
 
         label {
             font-size: 18px;

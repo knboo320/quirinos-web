@@ -1,3 +1,4 @@
+<title>Quirino's - Login</title>
 <main>
     <div class="left">
         <img src="assets/logoQuirinos.png" alt="">
@@ -6,12 +7,12 @@
         <h1>Login</h1>
         <form>
             <label for="rg">RG:</label>
-            <input type="text" name="rg" id="credentials">
+            <input type="text" name="rg" id="credentials" [(ngModel)]="credentials.rg">
     
             <label for="senha">Senha:</label>
-            <input type="password" name="pass" id="credentials">
+            <input type="password" name="pass" id="credentials" [(ngModel)]="credentials.senha">
 
-            <a routerLink="/home"><input type="submit" value="Logar"></a>
+            <a (click)="login()"><input type="submit" value="Logar"></a>
         </form>
     </div>
 </main>

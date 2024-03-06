@@ -1,4 +1,5 @@
 <app-header></app-header>
+<title>Quirino's - Home</title>
 <main>
     <div class="sidebar">
         <div class="filter">
@@ -64,9 +65,42 @@
     <div class="services">
         <h1 id="services-title">Registro de serviços:</h1>
         <div class="services-options">
-            <a routerLink=""><button id="new-service">+ Novo serviço</button></a>
+            <mat-dialog-actions>
+                <button id="new-service" (click)="openDialog()">+ Novo serviço</button>
+            </mat-dialog-actions>
             <a routerLink="/novo-funcionario"><button id="new-employee">Cadastrar funcionário</button></a>
             <a routerLink="/renovar-senha"><button id="new-password">Renovar senha</button></a>
+        </div>
+        <div class="services-list">
+            <div class="list-order">
+                <div class="order-top">
+                    <div class="order-top-left">
+                        <div class="order-number">
+                            <p>1</p>
+                        </div>
+                        <h1>Tipo de serviço</h1>
+                    </div>
+                    <div class="order-top-right">
+                        <p>#001</p>
+                        <img src="/assets/orderIcon.png" alt="">
+                    </div>
+                </div>
+                <div class="order-bottom">
+                    <div class="order-bottom-info-above">
+                        <div class="order-above-left">
+                            <p><span id="title-blue">Ordem do serviço: </span>Teste</p>
+                            <p><span id="title-blue">Seguradora: </span>teste</p>
+                        </div>
+                        <div class="order-above-right">
+                            <p id="title-blue">Aguardando</p>
+                        </div>
+                    </div>
+                    <div class="order-bottom-info-below">
+                        <p id="service-date">00/00/00</p>
+                        <p id="service-hour">00:00</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

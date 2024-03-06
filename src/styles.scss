@@ -41,11 +41,6 @@ $quirinos-web-theme: mat.define-light-theme((
     font-family: 'Montserrat', sans-serif;
 }
 
-main {
-    width: 100vw;
-    height: 100vh;
-}
-
 input[type="submit"] {
     border: none;
     border-radius: 10px;
@@ -64,12 +59,15 @@ input[type="submit"] {
 }
 
 #credentials {
-    width: 290px;
     font-size: 18px;
     padding: 10px;
     border: 2px solid #BFBFBF;
     border-radius: 10px;
     margin-bottom: 18px;
+}
+
+label {
+  font-weight: 500;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
