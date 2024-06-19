@@ -1,0 +1,212 @@
+<main>
+    <fa-icon [icon]="faX" matDialogClose></fa-icon>
+    <h1>Registrar Serviço</h1>
+    <form>
+        <div class="form-left">
+            <!-- Verifica se o cliente está encontrado -->
+            <div id="double-question">
+                <div id="question">
+                    <label for="insurance">Seguradora:</label>
+                    <input type="text" [(ngModel)]="seguradora" name="seguradora" id="credentials">
+                </div>
+
+                <div id="question">
+                    <label for="assistance">Número de assistência:</label>
+                    <input type="text" [(ngModel)]="numero_da_assistenciaString" name="numero_da_assistencia"
+                        id="credentials">
+                </div>
+            </div>
+            <ng-container *ngIf="!clienteEncontrado; else clientName">
+                <div id="single-question">
+                    <div id="question">
+                        <label for="name">Nome completo:</label>
+                        <input type="text" [(ngModel)]="nome" [disabled]="campoDesabilitado" name="nome"
+                            id="credentials">
+                    </div>
+                </div>
+            </ng-container>
+            <div id="single-question">
+                <div id="question">
+                    <label for="email_seguradora">E-mail da seguradora:</label>
+                    <input type="text" [(ngModel)]="email_seguradora" name="email_seguradora" id="credentials">
+                </div>
+            </div>
+            <div id="double-question">
+                <div id="question">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" [(ngModel)]="cpfString" (input)="getCPF()" name="cpf" id="credentials" mask="000.000.000-00">
+                </div>
+
+                <ng-container *ngIf="!clienteEncontrado; else clientAdress">
+                    <div id="question">
+                        <label for="adress">Endereço:</label>
+                        <input type="text" [(ngModel)]="endereco" [disabled]="campoDesabilitado" name="endereco"
+                            id="credentials">
+                    </div>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="!clienteEncontrado; else clientNeighbourCityComplement">
+                <div id="double-question">
+                    <div id="question">
+                        <label for="neighbourhood">Bairro:</label>
+                        <input type="text" [(ngModel)]="bairro" [disabled]="campoDesabilitado" name="bairro"
+                            id="credentials">
+                    </div>
+                    <div id="question">
+                        <label for="city">Cidade:</label>
+                        <input type="text" [(ngModel)]="cidade" [disabled]="campoDesabilitado" name="cidade"
+                            id="credentials">
+                    </div>
+                </div>
+                <div id="single-question">
+                    <div id="question">
+                        <label for="complement">Complemento (opcional):</label>
+                        <input type="text" [(ngModel)]="complemento" [disabled]="campoDesabilitado" name="complemento"
+                            id="credentials">
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #clientName>
+                <div id="single-question">
+                    <div id="question">
+                        <label for="name">Nome completo:</label>
+                        <input type="text" value="{{clienteEncontrado.dados_cliente.nome}}" [(ngModel)]="nome"
+                            name="nome" id="credentials">
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #clientAdress>
+                <div id="question">
+                    <label for="name">Endereço:</label>
+                    <input type="text" value="{{clienteEncontrado.dados_cliente.endereco}}" [(ngModel)]="endereco"
+                        name="endereco" id="credentials">
+                </div>
+            </ng-template>
+            <ng-template #clientNeighbourCityComplement>
+                <div id="double-question">
+                    <div id="question">
+                        <label for="neighbourhood">Bairro:</label>
+                        <input type="text" value="{{clienteEncontrado.dados_cliente.bairro}}" [(ngModel)]="bairro"
+                            name="neighbourhood" id="credentials">
+                    </div>
+                    <div id="question">
+                        <label for="city">Cidade:</label>
+                        <input type="text" value="{{clienteEncontrado.dados_cliente.cidade}}" [(ngModel)]="cidade"
+                            name="cidade" id="credentials">
+                    </div>
+                </div>
+                <div id="single-question">
+                    <div id="question">
+                        <label for="complement">Complemento (opcional):</label>
+                        <input type="text" value="{{clienteEncontrado.dados_cliente.complemento}}"
+                            [(ngModel)]="complemento" name="complemento" id="credentials">
+                    </div>
+                </div>
+            </ng-template>
+
+            <div class="success-message" style="font-size: 20px;" *ngIf="clientSuccess">
+                <p>Cliente cadastrado com sucesso!</p>
+            </div>
+            <div class="success-message" style="font-size: 20px;" *ngIf="serviceSuccess">
+                <p>Serviço cadastrado com sucesso!</p>
+            </div>
+
+            <div class="error-message" style="font-size: 20px;" *ngIf="insuranceMissing">
+                <p>Você precisa preencher a seguradora.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="assistanceMissing">
+                <p>Você precisa preencher o número de assistência.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="nameMissing">
+                <p>Você precisa preencher o nome.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="insuranceEmailMissing">
+                <p>Você precisa preencher o e-mail da seguradora.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="adressMissing">
+                <p>Você precisa preencher o endereço.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="neighbourhoodMissing">
+                <p>Você precisa preencher o bairro.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="cityMissing">
+                <p>Você precisa preencher a cidade.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="leadingSpace"><p>Não utilize apenas espaços vazios.</p></div>
+            <div class="error-message" *ngIf="invalidEmail"><p>O e-mail precisa conter um @.</p></div>
+            <div class="error-message" style="font-size: 20px;" *ngIf="invalidAssistance"><p>O número de assistência é inválido.</p></div>
+
+        </div>
+
+        <div class="error-message"></div>
+
+        <div class="form-right">
+            <div class="services-grid">
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="eletricista" id="service">
+                    <label for="eletricista">Eletricista</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="vidraceiro" id="service">
+                    <label for="vidraceiro">Vidraceiro</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="cobertura" id="service">
+                    <label for="cobertura">Cobertura Provisória</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="hidraulica" id="service">
+                    <label for="hidraulica">Hidráulica</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="vigilancia" id="service">
+                    <label for="vigilancia">Vigilância</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="tapume" id="service">
+                    <label for="tapume">Colocação de Tapume</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="entupimento" id="service">
+                    <label for="entupimento">Entupimento</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="checkup" id="service">
+                    <label for="checkup">Check-up</label>
+                </div>
+
+                <div class="service-row">
+                    <input type="checkbox" (change)="typeSelect($event)" name="chaveiro" id="service">
+                    <label for="chaveiro">Chaveiro</label>
+                </div>
+
+                <div class="another">
+                    <label for="outro">Outro...</label>
+                    <input type="text" [(ngModel)]="outro_servico" (change)="typeSelect($event)" name="outro"
+                        id="outro">
+                </div>
+            </div>
+            <div class="problem-description">
+                <label for="problem">Descrição do Problema e Serviço a Realizar:</label>
+                <textarea name="descricao_problema" [(ngModel)]="descricao_problema" id="problem" cols="16"
+                    rows="6"></textarea>
+            </div>
+            <input type="submit" value="Enviar" class="submitBtn" (click)="register()">
+
+            <div class="error-message" style="font-size: 20px; margin-top: 20px;" *ngIf="typeMissing">
+                <p>Você precisa selecionar o tipo do serviço.</p>
+            </div>
+            <div class="error-message" style="font-size: 20px; margin-top: 20px;" *ngIf="descriptionMissing">
+                <p>Você precisa descrever o problema.</p>
+            </div>
+
+        </div>
+    </form>
+</main>

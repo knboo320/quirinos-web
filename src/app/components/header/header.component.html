@@ -1,0 +1,27 @@
+<header>
+    <div class="left">
+        <div class="left-logo">
+            <img src="assets/logoQuirinos.png" alt="">
+        </div>
+        <div class="divider-bar"></div>
+        <div class="left-user">
+            <p>Bem-vindo, <b>{{ decreaseUserName(userName) }}</b>.</p>
+        </div>
+    </div>
+    <div class="right">
+        <button mat-button [matMenuTriggerFor]="user" id="profile-button">
+            {{ decreaseBoxUserName(userName) }}
+            <fa-icon [icon]="faUser"></fa-icon>
+        </button>
+        <mat-menu class="logout-menu" #user="matMenu">
+            <div class="mat-menu-top">
+                <fa-icon [icon]="faUserCircle"></fa-icon>
+                <p id="menuUserName">{{ userName }}</p>
+            </div>
+            <div class="mat-menu-div"></div>
+            <div class="mat-menu-bottom">
+                <button mat-menu-item (click)="logout()">Sair</button>
+            </div>
+        </mat-menu>
+    </div>
+</header>

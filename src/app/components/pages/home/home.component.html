@@ -1,0 +1,279 @@
+<app-header></app-header>
+<title>Quirino's - Home</title>
+<main>
+    <div class="sidebar">
+        <div class="filter">
+            Filtrar
+            <fa-icon [icon]="faCalendar"></fa-icon>
+        </div>
+        <details class="service-date">
+            <summary>Data</summary>
+            <input type="date" name="date-input" id="collapsible" [(ngModel)]="selectedDate" (change)="onDateChange(); closeDetails()"
+                placeholder="">
+        </details>
+        <details class="service-number" (toggle)="handleDetailsToggle($event)">
+            <summary>Número do serviço</summary>
+            <input type="text" name="service-number-input" id="collapsible" [(ngModel)]="serviceNumber"
+                (keydown.enter)="fetchServiceById()" placeholder="Digite aqui...">
+            <input type="submit" class="submitBtn" (click)="fetchServiceById(); closeDetails()" value="Filtrar">
+            <div *ngIf="noServiceByIdFound" class="error-message" style="margin: 10px 0 0 0;">
+                <p>O serviço não existe ou você não digitou um valor válido.</p>
+            </div>
+        </details>
+        <details class="service-status" (change)="fetchServiceByStatus()">
+            <summary>Status</summary>
+            <div class="service-status-row">
+                <input type="radio" name="status" id="concluido" [(ngModel)]="serviceStatus" (change)="closeDetails()" value="concluido">
+                <label for="concluido">Concluído</label>
+            </div>
+            <div class="service-status-row">
+                <input type="radio" name="status" id="pendente" [(ngModel)]="serviceStatus" (change)="closeDetails()" value="pendente">
+                <label for="pendente">Pendente</label>
+            </div>
+            <div class="service-status-row">
+                <input type="radio" name="status" id="em_andamento" [(ngModel)]="serviceStatus" (change)="closeDetails()" value="em_andamento">
+                <label for="em_andamento">Em Andamento</label>
+            </div>
+            <div class="service-status-row">
+                <input type="radio" name="status" id="todos" [(ngModel)]="serviceStatus" (change)="allServices($event); closeDetails()"
+                    value="todos">
+                <label for="todos">Todos</label>
+            </div>
+        </details>
+        <details class="service-type">
+            <summary>Tipo do serviço</summary>
+            <div class="service-row">
+                <input type="radio" name="type" id="todos" [value]="'Todos'" (change)="allServices($event); closeDetails()">
+                <label for="todos">Todos</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="eletricista" [value]="'Eletricista'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="eletricista">Eletricista</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="hidraulica" [value]="'Hidraulica'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="hidraulica">Hidráulica</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="entupimento" [value]="'Entupimento'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="entupimento">Entupimento</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="vidraceiro" [value]="'Vidraceiro'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="vidraceiro">Vidraceiro</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="vigilancia" [value]="'Vigilância'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="vigilancia">Vigilância</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="check-up" [value]="'Check-up'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="check-up">Check-up</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="cobertura" [value]="'Cobertura Provisória'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="cobertura">Cobertura Provisória</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="tapume" [value]="'Colocação de Tapume'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="tapume">Colocação de Tapume</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="chaveiro" [value]="'Chaveiro'"
+                    (change)="fetchServiceByType($event); closeDetails()">
+                <label for="chaveiro">Chaveiro</label>
+            </div>
+
+            <div class="service-row">
+                <input type="radio" name="type" id="outros" [value]="'Outros'" (change)="fetchServiceByType($event); closeDetails()">
+                <label for="outros">Outros</label>
+            </div>
+        </details>
+    </div>
+    <div class="main-body">
+        <div class="body-top">
+            <h1 id="services-title">Registro de serviços:</h1>
+            <div class="services-options">
+                <mat-dialog-actions>
+                    <button id="new-service" (click)="openDialog()">+ Novo serviço</button>
+                </mat-dialog-actions>
+                <a routerLink="/novo-funcionario"><button id="new-employee">Cadastrar funcionário</button></a>
+                <a routerLink="/renovar-senha"><button id="new-password">Renovar senha</button></a>
+                <a routerLink="/novo-email"><button id="new-email">Registrar e-mail</button></a>
+            </div>
+        </div>
+        <div class="body-bottom">
+            <div class="services">
+                <h2 *ngIf="noServiceFound">Nenhum serviço foi registrado nesse dia.</h2>
+                <div class="services-list" *ngIf="!noServiceFound">
+                    <div *ngIf="responseData && responseData.servicos">
+                        <div class="list-order" *ngFor="let servico of responseData.servicos"
+                            (click)="showDetails(servico)">
+                            <div class="order-top">
+                                <div class="order-top-left">
+                                    <h1>{{ decreaseServiceTitle(servico.tipo_de_servico) }}</h1>
+                                </div>
+                                <div class="order-top-right">
+                                    <p>#{{ servico.id_servico }}</p>
+                                    <img src="/assets/orderIcon.png" alt="">
+                                </div>
+                            </div>
+                            <div class="order-bottom">
+                                <div class="order-bottom-info-above">
+                                    <div class="order-above-left">
+                                        <p><span id="title-blue">Ordem do serviço: </span>{{ servico.id_servico }}</p>
+                                        <p><span id="title-blue">Seguradora: </span>{{ servico.seguradora }}</p>
+                                    </div>
+                                    <div class="order-above-right">
+                                        <p id="title-blue">{{ servico.status }}</p>
+                                    </div>
+                                </div>
+                                <div class="order-bottom-info-below">
+                                    <p id="service-date">{{ servico.dt_criacao.slice(8,10)+"/"+servico.dt_criacao.slice(5,7)+"/"+servico.dt_criacao.slice(0, 4) }}</p>
+                                    <p id="service-hour">{{ servico.dt_criacao }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="service-opened" *ngIf="selectedService">
+                <div class="order-top">
+                    <div class="order-top-left">
+                        <fa-icon [icon]="faX" style="font-size: 30px;" (click)="closeDetails()"></fa-icon>
+                        <h1>{{ decreaseServiceTitle(selectedService.tipo_de_servico) }}</h1>
+                    </div>
+                    <div class="order-top-right">
+                        <p>#{{ selectedService.id_servico }}</p>
+                        <img src="/assets/orderIcon.png" alt="">
+                    </div>
+                </div>
+                <div class="opened-bottom">
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="service-type-label" id="response-label">Tipo(s) de serviço(s):</p>
+                            <p class="service-type" id="response-box">{{ selectedService.tipo_de_servico || 'Sem dado'
+                                }}</p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="client-name-label" id="response-label">Nome do cliente:</p>
+                            <p class="client-name" id="response-box">{{ selectedClient.dados_cliente.nome || 'Sem dado'
+                                }}</p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="client-name-label" id="response-label">E-mail da seguradora:</p>
+                            <p class="client-name" id="response-box">{{ selectedService.email_seguradora || 'Sem dado'
+                                }}</p>
+                        </div>
+                    </div>
+                    <div class="double-response">
+                        <div class="response">
+                            <p class="client-cpf-label" id="response-label">CPF:</p>
+                            <p class="client-cpf" id="response-box">{{ selectedClient.dados_cliente.cpf || 'Sem dado' }}
+                            </p>
+                        </div>
+                        <div class="response">
+                            <p class="client-adress-label" id="response-label">Endereço:</p>
+                            <p class="client-adress" id="response-box">{{ selectedClient.dados_cliente.endereco || 'Sem
+                                dado' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="double-response">
+                        <div class="response">
+                            <p class="client-neighbourhood-label" id="response-label">Bairro:</p>
+                            <p class="client-neighbourhood" id="response-box">{{ selectedClient.dados_cliente.bairro ||
+                                'Sem
+                                dado' }}</p>
+                        </div>
+                        <div class="response">
+                            <p class="client-city-label" id="response-label">Cidade:</p>
+                            <p class="client-complement" id="response-box">{{ selectedClient.dados_cliente.cidade ||
+                                'Sem
+                                dado'}}</p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="client-complement-label" id="response-label">Complemento:</p>
+                            <p class="client-complement" id="response-box">{{ selectedClient.dados_cliente.complemento
+                                || 'Sem
+                                dado'}}</p>
+                        </div>
+                    </div>
+                    <div class="double-response">
+                        <div class="response">
+                            <p class="client-service-order-label" id="response-label">Ordem do serviço:</p>
+                            <p class="client-service-order" id="response-box">{{ selectedService.id_servico || 'Sem
+                                dado' }}</p>
+                        </div>
+                        <div class="response">
+                            <p class="client-assistance-label" id="response-label">Seguradora:</p>
+                            <p class="client-assistance" id="response-box">{{ selectedService.seguradora || 'Sem dado'}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="double-response">
+                        <div class="response">
+                            <p class="client-service-number-label" id="response-label">Número do serviço:</p>
+                            <p class="client-service-number" id="response-box">{{ selectedService.id_servico || 'Sem
+                                dado' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="client-description-text-label" id="response-label">Descrição do problema:</p>
+                            <p class="client-description" id="response-box">{{ selectedService.descricao_problema ||
+                                'Sem dado'
+                                }}</p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="check-up-status" id="response-label">Check-up: {{ selectedService.checkup ? 'Sim'
+                                : 'Não'
+                                }}</p>
+                            <p class="check-up-list" id="response-box">{{ selectedService.checkup || 'Nenhum pedido de
+                                check-up.' }}</p>
+                        </div>
+                    </div>
+                    <div class="single-response">
+                        <div class="response">
+                            <p class="status-label" id="response-label">Status:</p>
+                            <p class="status" *ngIf="selectedService.status === 'Pendente'"
+                                style="color: #c20000; font-weight: 600;">Pendente</p>
+
+                            <p class="status" *ngIf="selectedService.status === 'Em Andamento'"
+                                style="color: #CBA648; font-weight: 600;">Em Andamento</p>
+
+                            <p class="status" *ngIf="selectedService.status === 'Concluído'"
+                                style="color: #53a653; font-weight: 600;">Em Andamento</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

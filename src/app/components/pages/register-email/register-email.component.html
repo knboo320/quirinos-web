@@ -1,0 +1,27 @@
+<title>Quirino's - Registrar e-mail</title>
+<main>
+    <div class="left">
+        <img src="assets/logoQuirinos.png" alt="">
+    </div>
+    <div class="right">
+        <h1>Registrar e-mail</h1>
+        <form>
+            <label for="cpf" id="question-label">E-mail:</label>
+            <input type="text" name="cpf" [(ngModel)]="email" id="credentials">
+
+            <label for="new-pass" id="question-label">Senha:</label>
+            <input type="password" name="new-pass" [(ngModel)]="senha" id="credentials">
+
+            <div *ngIf="emailSuccess" class="success-message">
+            <p>E-mail registrado com sucesso!</p></div>
+
+            <div *ngIf="emailMissing" class="error-message"><p>Você precisa preencher o e-mail.</p></div>
+            <div *ngIf="passMissing" class="error-message"><p>Você precisa preencher a senha.</p></div>
+            <div class="error-message" *ngIf="invalidEmail"><p>O e-mail precisa conter um @.</p></div>
+            <div class="error-message" *ngIf="leadingSpace"><p>Não utilize apenas espaços vazios.</p></div>
+
+            <a><input type="submit" class="submitBtn" (click)="postEmail()" value="Registrar e-mail"></a>
+            <a><input routerLink="/home" type="submit" value="Voltar" class="returnBtn"></a>
+        </form>
+    </div>
+</main>

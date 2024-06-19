@@ -1,0 +1,37 @@
+<title>Quirino's - Registrar funcionário</title>
+<main>
+    <div class="left">
+        <img src="assets/logoQuirinos.png" alt="">
+    </div>
+    <div class="right">
+        <h1>Cadastrar funcionário</h1>
+        <form>
+            <label for="name" id="question-label">Nome completo:</label>
+            <input type="text" [(ngModel)]="nome" name="name" id="credentials">
+
+            <label for="email" id="question-label">E-mail:</label>
+            <input type="email" [(ngModel)]="email" name="email" id="credentials">
+
+            <label for="pass" id="question-label">Senha:</label>
+            <input type="password" [(ngModel)]="senha" name="pass" id="credentials">
+
+            <label for="cpf" id="question-label">CPF:</label>
+            <input type="text" [(ngModel)]="cpfString" name="cpf" id="credentials" mask="000.000.000-00">
+
+            <div *ngIf="registerSuccess" class="success-message">
+                <p>Funcionário cadastrado com sucesso!</p>
+            </div>
+
+            <div class="error-message" *ngIf="nameMissing"><p>Você precisa preencher o nome.</p></div>
+            <div class="error-message" *ngIf="emailMissing"><p>Você precisa preencher o e-mail.</p></div>
+            <div class="error-message" *ngIf="passMissing"><p>Você precisa preencher a senha.</p></div>
+            <div class="error-message" *ngIf="cpfMissing"><p>Você precisa preencher o CPF.</p></div>
+            <div class="error-message" *ngIf="alreadyExist"><p>O usuário já existe.</p></div>
+            <div class="error-message" *ngIf="invalidEmail"><p>O e-mail precisa conter um @.</p></div>
+            <div class="error-message" *ngIf="leadingSpace"><p>Não utilize apenas espaços vazios.</p></div>
+
+            <a><input type="submit" value="Cadastrar" class="submitBtn" (click)="postEmployee()"></a>
+            <a [routerLink]="destiny"><input type="submit" value="Voltar" class="returnBtn"></a>
+        </form>
+    </div>
+</main>

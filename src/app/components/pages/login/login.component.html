@@ -1,0 +1,28 @@
+<title>Quirino's - Login</title>
+<main>
+    <div class="left">
+        <img src="assets/logoQuirinos.png" alt="">
+    </div>
+    <div class="right">
+        <h1>Login</h1>
+        <form>
+            <label for="cpf" id="question-label">CPF:</label>
+            <input type="text" name="cpf" class="cpf" id="credentials" [(ngModel)]="credentials.cpf" [ngClass]="{ 'error-border': invalidError }" mask="000.000.000-00">
+    
+            <label for="senha" id="question-label">Senha:</label>
+            <input type="password" name="pass" class="pass" id="credentials" [(ngModel)]="credentials.senha" [ngClass]="{ 'error-border': invalidError }">
+
+            <div class="error-message" *ngIf="invalidError"><p>CPF ou senha incorretos.</p></div>
+
+            <div class="user-question">
+                <p id="login-question">Não possui cadastro? <a routerLink="/novo-funcionario" class="user-link">Clique aqui.</a></p>
+            </div>
+
+            <div class="pass-question">
+                <p id="login-question">Esqueceu sua senha? <a routerLink="/renovar-senha" class="pass-link">Clique aqui.</a></p>
+            </div>
+
+            <a (click)="login()"><input type="submit" class="submitBtn" value="Logar"></a>
+        </form>
+    </div>
+</main>

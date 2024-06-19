@@ -1,0 +1,81 @@
+<fa-icon [icon]="faX" matDialogClose></fa-icon> 
+<main>
+    <div class="check-up-title">
+        <h1>Selecione o Check-up:</h1>
+    </div>
+    <div class="check-up-list">
+        <div class="service-row">
+            <input type="checkbox" name="rev-eletrica" id="service"
+                (change)="toggleQuantityInput($event, 'Revisão Elétrica')">
+            <label for="rev-eletrica">Revisão Elétrica</label>
+        </div>
+        <div class="service-row">
+            <input type="checkbox" name="rev-hidraulica" id="service"
+                (change)="toggleQuantityInput($event, 'Revisão Hidráulica')">
+            <label for="rev-hidraulica">Revisão Hidráulica</label>
+        </div>
+        <div class="service-row">
+            <input type="checkbox" name="lub-fechadura" id="service"
+                (change)="toggleQuantityInput($event, 'Lubrificação de Fechaduras')">
+            <label for="lub-fechadura">Lubrificação de Fechaduras</label>
+        </div>
+        <input type="text" class="quantity-input" *ngIf="selectedCheckups.includes('Lubrificação de Fechaduras')"
+            placeholder="Digite a quantidade..." (input)="updateQuantityValue('Lubrificação de Fechaduras', $event)">
+        <div class="service-row">
+            <input type="checkbox" name="limp-caixa" id="service"
+                (change)="toggleQuantityInput($event, 'Limpeza de Caixa')">
+            <label for="limp-caixa">Limpeza de Caixa</label>
+        </div>
+        <input type="text" class="quantity-input" *ngIf="selectedCheckups.includes('Limpeza de Caixa')"
+            placeholder="Digite a quantidade..." (input)="updateQuantityValue('Limpeza de Caixa', $event)">
+        <div class="service-row">
+            <input type="checkbox" name="fix-objetos" id="service"
+                (change)="toggleQuantityInput($event, 'Fixação de Objetos')">
+            <label for="fix-objetos">Fixação de Objetos</label>
+        </div>
+        <input type="text" class="quantity-input" *ngIf="selectedCheckups.includes('Fixação de Objetos')"
+            placeholder="Digite a quantidade..." (input)="updateQuantityValue('Fixação de Objetos', $event)">
+        <div class="service-row">
+            <input type="checkbox" name="limp-caixa-agua" id="service"
+                (change)="toggleQuantityInput($event, 'Limpeza de Caixa de Água')">
+            <label for="limp-caixa-agua">Limpeza de Caixa da Água</label>
+        </div>
+        <div class="service-row">
+            <input type="checkbox" name="troca-vidros" id="service"
+                (change)="toggleQuantityInput($event, 'Troca de Vidros')">
+            <label for="troca-vidros">Troca de Vidros</label>
+        </div>
+        <input type="text" class="quantity-input" *ngIf="selectedCheckups.includes('Troca de Vidros')"
+            placeholder="Digite a quantidade..." (input)="updateQuantityValue('Troca de Vidros', $event)">
+        <div class="service-row">
+            <input type="checkbox" name="troca-lampadas" id="service"
+                (change)="toggleQuantityInput($event, 'Troca de Lâmpadas')">
+            <label for="troca-lampadas">Troca de Lâmpadas</label>
+        </div>
+        <input type="text" class="quantity-input" *ngIf="selectedCheckups.includes('Troca de Lâmpadas')"
+            placeholder="Digite a quantidade..." (input)="updateQuantityValue('Troca de Lâmpadas', $event)">
+        <div class="service-row">
+            <input type="checkbox" name="inst-olho-magico" id="service"
+                (change)="toggleQuantityInput($event, 'Instalação de Olho Mágico')">
+            <label for="inst-olho-magico">Instalação de Olho Mágico</label>
+        </div>
+        <div class="service-row">
+            <input type="checkbox" name="cacamba" id="service" (change)="toggleQuantityInput($event, 'Caçamba')">
+            <label for="cacamba">Caçamba</label>
+        </div>
+    </div>
+
+    <div class="success-message" *ngIf="messageOnClick && selectedCheckups.length > 0">
+        <p>Check-up(s) registrado(s) com sucesso!</p>
+    </div>
+
+    <div class="error-message" *ngIf="messageOnClick && selectedCheckups.length < 1">
+        <p>Você precisa preencher uma das caixas.</p>
+    </div>
+
+    <div class="error-message" *ngIf="invalidQuantity">
+        <p>O valor digitado é inválido.</p>
+    </div>
+
+    <input type="submit" value="Enviar" class="submitBtn" (click)="sendData()">
+</main>

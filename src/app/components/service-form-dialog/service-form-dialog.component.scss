@@ -1,0 +1,128 @@
+main {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        font-size: 40px;
+        font-weight: 500;
+        margin: auto;
+    }
+
+    fa-icon {
+        font-size: 30px;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        gap: 65px;
+        padding: 35px;
+
+        .form-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            #question {
+                display: flex;
+                flex-direction: column;
+                font-weight: 500;
+                gap: 5px;
+
+                input {
+                    padding: 10px;
+                }
+
+                .double-after {
+                    width: 13.8125rem;
+                }
+
+            }
+
+            #double-question {
+                display: flex;
+                gap: 20px;
+            }
+
+            #single-question {
+                width: 100%;
+            }
+        }
+
+        .form-right {
+            .services-grid {
+                display: grid;
+                grid-auto-rows: 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                gap: 0px 0px;
+                grid-template-areas:
+                    "eletricista hidraulica entupimento"
+                    "vidraceiro vigilancia checkup"
+                    "cobertura tapume chaveiro"
+                    "outro . .";
+
+                #eletricista {
+                    grid-area: eletricista;
+                }
+
+                #vidraceiro {
+                    grid-area: vidraceiro;
+                }
+
+                #cobertura {
+                    grid-area: cobertura;
+                }
+
+                #hidraulica {
+                    grid-area: hidraulica;
+                }
+
+                #vigilancia {
+                    grid-area: vigilancia;
+                }
+
+                #tapume {
+                    grid-area: tapume;
+                }
+
+                #entupimento {
+                    grid-area: entupimento;
+                }
+
+                #checkup {
+                    grid-area: checkup;
+                }
+
+                #chaveiro {
+                    grid-area: chaveiro;
+                }
+
+                #outro {
+                    grid-area: outro;
+                }
+            }
+
+            .problem-description {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin-bottom: 18px;
+
+                textarea {
+                    border: 2px solid #BFBFBF;
+                    border-radius: 10px;
+                    padding: 10px;
+                    resize: none;
+                }
+
+                label {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+}

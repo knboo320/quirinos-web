@@ -1,0 +1,29 @@
+fa-icon {
+    font-size: 30px;
+    cursor: pointer;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+main {
+    padding: 40px;
+
+    .check-up-title {
+        text-align: center;
+        margin: auto;
+        font-size: 12px;
+        font-weight: 500;
+        margin: 20px 0 20px 0;
+    }
+
+    .check-up-list {
+        
+        .quantity-input {
+            padding: 5px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    }
+}
