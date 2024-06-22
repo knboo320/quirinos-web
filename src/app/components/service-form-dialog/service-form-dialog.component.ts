@@ -51,6 +51,7 @@ export class ServiceFormDialogComponent {
   leadingSpace: boolean = false;
   invalidAssistance: boolean = false;
   invalidEmail: boolean = false;
+  generalError: boolean = false;
   
   constructor(
     private http: HttpClient,
@@ -60,10 +61,20 @@ export class ServiceFormDialogComponent {
 
   register() {
 
+    this.insuranceMissing = false;
+    this.insuranceEmailMissing = false;
+    this.assistanceMissing = false;
+    this.nameMissing = false;
+    this.adressMissing = false;
+    this.neighbourhoodMissing = false;
+    this.typeMissing = false;
+    this.descriptionMissing = false;
+    this.cityMissing = false;
     this.clientSuccess = false;
     this.serviceSuccess = false;
     this.leadingSpace = false;
     this.invalidEmail = false;
+    this.generalError = false;
 
     if(!this.seguradora) {
       this.insuranceMissing = true;
@@ -195,6 +206,9 @@ export class ServiceFormDialogComponent {
           this.postService()
         },
         (err) => {
+          if (err.status === 500) {
+            this.generalError = true; 
+          }
           console.error('Erro ao cadastrar cliente:', err);
         }
       );
@@ -232,6 +246,9 @@ export class ServiceFormDialogComponent {
           console.log(dataService)
         },
         (err) => {
+          if (err.status === 500) {
+            this.generalError = true; 
+          }
           console.error('Erro ao enviar a solicitação POST:', err);
         }
       );

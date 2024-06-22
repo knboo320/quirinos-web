@@ -207,6 +207,10 @@
                 <p>Você precisa descrever o problema.</p>
             </div>
 
+            <div class="error-message" style="font-size: 20px; margin-top: 20px;" *ngIf="generalError">
+                <p>Um erro ocorreu. Verifique os dados <br> preenchidos e tente novamente.</p>
+            </div>
+
         </div>
     </form>
 </main>

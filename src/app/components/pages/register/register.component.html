@@ -29,6 +29,8 @@
             <div class="error-message" *ngIf="alreadyExist"><p>O usuário já existe.</p></div>
             <div class="error-message" *ngIf="invalidEmail"><p>O e-mail precisa conter um @.</p></div>
             <div class="error-message" *ngIf="leadingSpace"><p>Não utilize apenas espaços vazios.</p></div>
+            <div class="error-message" *ngIf="smallCpf"><p>Formato de CPF inválido, verifique se <br> seu CPF contêm 11 dígitos.</p></div>
+            <div class="error-message" *ngIf="generalError"><p>Um erro ocorreu. Verifique os dados <br> preenchidos e tente novamente.</p></div>
 
             <a><input type="submit" value="Cadastrar" class="submitBtn" (click)="postEmployee()"></a>
             <a [routerLink]="destiny"><input type="submit" value="Voltar" class="returnBtn"></a>

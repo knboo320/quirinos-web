@@ -17,6 +17,7 @@ export class NewPasswordComponent implements OnInit {
   newPassSuccess: boolean = false;
   generalError: boolean = false;
   differenceError: boolean = false;
+  leadingSpace: boolean = false;
   destiny!: string;
 
   constructor(
@@ -35,8 +36,22 @@ export class NewPasswordComponent implements OnInit {
   }
 
   renewPass() {
+    this.newPassSuccess = false;
     this.generalError = false;
     this.differenceError = false;
+
+    if(this.newPass.startsWith(' ')) {
+      this.leadingSpace = true;
+      return
+    } else if (this.newPass) {
+      this.leadingSpace = false;
+
+    } if (this.confirmPass.startsWith(' ')) {
+      this.differenceError = true;
+      return
+    } else if (this.confirmPass) {
+      this.leadingSpace = false
+    }
 
     if (this.newPass === this.confirmPass) {
       this.forgotPass.renewPass(this.cpf, this.newPass).subscribe(response => {

@@ -28,6 +28,9 @@ export class CheckupDialogComponent {
   ];
 
   toggleQuantityInput(event: any, label: string) {
+    this.invalidQuantity = false;
+    this.messageOnClick = false;
+
     if (event.target.checked) {
       this.selectedCheckups.push(label);
       if (this.checkupsWithQuantity.includes(label)) {
@@ -69,6 +72,7 @@ export class CheckupDialogComponent {
 
   sendData() {
     this.invalidQuantity = false;
+    this.messageOnClick = false;
 
     for (const key in this.quantityValues) {
       const value = this.quantityValues[key];

@@ -23,6 +23,8 @@ export class RegisterComponent implements OnInit {
   invalidEmail: boolean = false;
   alreadyExist: boolean = false;
   leadingSpace: boolean = false;
+  smallCpf: boolean = false;
+  generalError: boolean = false;
 
   destiny!: string;
 
@@ -56,6 +58,7 @@ export class RegisterComponent implements OnInit {
     this.passMissing = false;
     this.cpfMissing = false;
     this.leadingSpace = false;
+    this.generalError = false;
 
     if(!this.nome) {
       this.nameMissing = true;
@@ -66,6 +69,7 @@ export class RegisterComponent implements OnInit {
       return;
     } else if (this.nome) {
       this.nameMissing = false;
+      this.leadingSpace = false;
 
     } if (!this.email) {
       this.emailMissing = true;
@@ -73,7 +77,11 @@ export class RegisterComponent implements OnInit {
     } else if (!this.email.includes('@')) {
       this.invalidEmail = true;
       return;
-    } else {
+    } else if(this.email.startsWith(' ')) {
+      this.emailMissing = false;
+      this.leadingSpace = true;
+      return;
+    } else if (this.email) {
       this.emailMissing = false;
       this.invalidEmail = false;
       this.leadingSpace = false;
@@ -88,12 +96,20 @@ export class RegisterComponent implements OnInit {
       return;
     } else if (this.senha) {
       this.passMissing = false;
+      this.leadingSpace = false;
 
-    } if(!this.cpf) {
+    } if(!this.cpfString) {
       this.cpfMissing = true;
       return;
-    } else if (this.cpf) {
+    } else if (this.cpfString.length < 11) {
+      this.registerSuccess = false
       this.cpfMissing = false;
+      this.smallCpf = true;
+      return;
+    } else if (this.cpfString) {
+      this.smallCpf = false;
+      this.cpfMissing = false;
+      this.leadingSpace = false;
     }
 
     this.http.post(url, data)
@@ -101,10 +117,13 @@ export class RegisterComponent implements OnInit {
       (res) => {
         this.registerSuccess = true;
         console.log('Resposta da solicitação POST:', res);
+        console.log(data)
       },
       (err) => {
         if (err.status === 409) {
           this.alreadyExist = true;
+        } else if (err.status === 500) {
+          this.generalError = true;
         }
         console.error('Erro ao enviar a solicitação POST:', err);
       }

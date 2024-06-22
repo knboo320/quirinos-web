@@ -15,10 +15,11 @@
             <summary>Número do serviço</summary>
             <input type="text" name="service-number-input" id="collapsible" [(ngModel)]="serviceNumber"
                 (keydown.enter)="fetchServiceById()" placeholder="Digite aqui...">
-            <input type="submit" class="submitBtn" (click)="fetchServiceById(); closeDetails()" value="Filtrar">
+            <input type="submit" class="submitBtn" (click)="fetchServiceById()" value="Filtrar">
             <div *ngIf="noServiceByIdFound" class="error-message" style="margin: 10px 0 0 0;">
                 <p>O serviço não existe ou você não digitou um valor válido.</p>
             </div>
+            <input type="submit" class="returnBtn" value="Todos" style="height: 37px; font-size: 20px; width: 100%;" (click)="allServices($event)">
         </details>
         <details class="service-status" (change)="fetchServiceByStatus()">
             <summary>Status</summary>
@@ -139,7 +140,7 @@
                                 <div class="order-bottom-info-above">
                                     <div class="order-above-left">
                                         <p><span id="title-blue">Ordem do serviço: </span>{{ servico.id_servico }}</p>
-                                        <p><span id="title-blue">Seguradora: </span>{{ servico.seguradora }}</p>
+                                        <p><span id="title-blue">Seguradora: </span>{{ decreaseServiceEnsurance(servico.seguradora) }}</p>
                                     </div>
                                     <div class="order-above-right">
                                         <p id="title-blue">{{ servico.status }}</p>
@@ -147,7 +148,7 @@
                                 </div>
                                 <div class="order-bottom-info-below">
                                     <p id="service-date">{{ servico.dt_criacao.slice(8,10)+"/"+servico.dt_criacao.slice(5,7)+"/"+servico.dt_criacao.slice(0, 4) }}</p>
-                                    <p id="service-hour">{{ servico.dt_criacao }}</p>
+                                    <p id="service-hour">{{ servico.dt_criacao.slice(11, 16) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +159,7 @@
                 <div class="order-top">
                     <div class="order-top-left">
                         <fa-icon [icon]="faX" style="font-size: 30px;" (click)="closeDetails()"></fa-icon>
-                        <h1>{{ decreaseServiceTitle(selectedService.tipo_de_servico) }}</h1>
+                        <h1>{{ decreaseServiceOpenedTitle(selectedService.tipo_de_servico) }}</h1>
                     </div>
                     <div class="order-top-right">
                         <p>#{{ selectedService.id_servico }}</p>

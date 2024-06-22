@@ -148,6 +148,8 @@ export class HomeComponent implements OnInit {
     if (!this.serviceNumber) {
       this.noServiceByIdFound = true;
       return;
+    } else if (this.serviceNumber) {
+      this.closeDetails()
     }
 
     // Ler o token do LocalStorage
@@ -224,9 +226,8 @@ export class HomeComponent implements OnInit {
   }
 
   allServices(event: any) {
-    if (event.target.checked) {
-      this.fetchServiceData()
-    }
+    this.noServiceByIdFound = false;
+    this.fetchServiceData();
   }
 
   fetchServiceByType(event: any) {
@@ -278,16 +279,23 @@ export class HomeComponent implements OnInit {
   }
 
   decreaseServiceTitle(title: string): string {
-    if (title.length > 28) {
-      return title.slice(0, 28) + '...';
+    if (title.length > 26) {
+      return title.slice(0, 26) + '...';
     }
     return title;
   }
 
   decreaseServiceOpenedTitle(title: string): string {
-    if (title.length > 26) {
-      return title.slice(0, 26) + '...';
+    if (title.length > 24) {
+      return title.slice(0, 24) + '...';
     }
     return title;
+  }
+
+  decreaseServiceEnsurance(ensurance: string): string {
+    if (ensurance.length > 36) {
+      return ensurance.slice(0, 36) + '...'
+    }
+    return ensurance;
   }
 }
