@@ -56,15 +56,12 @@ export class NewPasswordComponent implements OnInit {
     if (this.newPass === this.confirmPass) {
       this.forgotPass.renewPass(this.cpf, this.newPass).subscribe(response => {
         this.newPassSuccess = true;
-        console.log('A senha foi mudada', response)
       },
         error => {
           this.generalError = true;
-          console.error('A senha não foi mudada.', error)
         });
     } else {
       this.differenceError = true;
-      console.log('As senhas não coincidem.')
     }
   }
 }

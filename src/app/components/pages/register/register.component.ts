@@ -116,8 +116,6 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       (res) => {
         this.registerSuccess = true;
-        console.log('Resposta da solicitação POST:', res);
-        console.log(data)
       },
       (err) => {
         if (err.status === 409) {
@@ -125,7 +123,6 @@ export class RegisterComponent implements OnInit {
         } else if (err.status === 500) {
           this.generalError = true;
         }
-        console.error('Erro ao enviar a solicitação POST:', err);
       }
     )
   }

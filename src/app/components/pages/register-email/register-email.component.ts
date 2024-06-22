@@ -66,11 +66,9 @@ export class RegisterEmailComponent {
     this.http.post(url, data, { headers }).subscribe(
       (res) => {
         this.emailSuccess = true;
-        console.log('Resposta da solicitação:', res)
       },
       (err) => {
         this.emailSuccess = false;
-        console.error('Erro ao enviar a solicitação POST:', err);
       }
     )
   }

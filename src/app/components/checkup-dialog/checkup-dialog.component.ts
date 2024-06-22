@@ -66,8 +66,6 @@ export class CheckupDialogComponent {
     });
     this.checkupGet.selectedData = concatenatedData;
     this.checkupGet.setConcatenatedData(concatenatedData);
-    console.log(concatenatedData);
-    console.log(this.quantityValues);
   }
 
   sendData() {

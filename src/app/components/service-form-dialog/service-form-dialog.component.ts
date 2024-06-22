@@ -199,8 +199,6 @@ export class ServiceFormDialogComponent {
     this.http.post(clientUrl, dataClient, { headers })
       .subscribe(
         (res: any) => {
-          console.log('Resposta da solicitação POST:', res);
-          console.log(dataClient)
           this.id_cliente = res.dados_cliente.id_cliente;
           this.clientSuccess = true;
           this.postService()
@@ -209,7 +207,6 @@ export class ServiceFormDialogComponent {
           if (err.status === 500) {
             this.generalError = true; 
           }
-          console.error('Erro ao cadastrar cliente:', err);
         }
       );
   }
@@ -240,16 +237,13 @@ export class ServiceFormDialogComponent {
     this.http.post(serviceUrl, dataService, { headers })
       .subscribe(
         (res) => {
-          console.log('Resposta da solicitação POST:', res);
           this.serviceCreated.emit()
           this.serviceSuccess = true;
-          console.log(dataService)
         },
         (err) => {
           if (err.status === 500) {
             this.generalError = true; 
           }
-          console.error('Erro ao enviar a solicitação POST:', err);
         }
       );
   }
@@ -272,12 +266,10 @@ export class ServiceFormDialogComponent {
     this.http.get(cpfURL, { headers }).subscribe(
       (cpfData: any) => {
         this.clienteEncontrado = cpfData;
-        console.log('Cliente encontrado:', this.clienteEncontrado);
         this.campoDesabilitado = false;
         this.clientePreenchido();
       },
       (err) => {
-        console.error('Erro ao buscar cliente por CPF:', err);
         this.clienteEncontrado = null;
         this.campoDesabilitado = false;
         this.limparCliente()
@@ -345,7 +337,6 @@ export class ServiceFormDialogComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('O diálogo foi fechado', result)
     });
   }
 }

@@ -86,7 +86,6 @@ export class HomeComponent implements OnInit {
           }
         },
         (error) => {
-          console.error('Erro ao buscar dados.', error);
           this.noServiceFound = true;
         }
       );
@@ -111,11 +110,9 @@ export class HomeComponent implements OnInit {
     // Adicionar os headers na requisição HTTP GET
     this.httpClient.get(url, { headers }).subscribe(
       (response) => {
-        console.log('Dados recebidos:', response);
         this.selectedClient = response;
       },
       (error) => {
-        console.error('Erro ao buscar dados:', error);
       }
     );
   }
@@ -133,11 +130,9 @@ export class HomeComponent implements OnInit {
 
     this.httpClient.get(url, { headers }).subscribe(
       (response) => {
-        console.log('Servico recebidos:', response);
         this.selectedListService = response
       },
       (error) => {
-        console.error('Erro ao buscar dados:', error);
       }
     );
   }
@@ -166,7 +161,6 @@ export class HomeComponent implements OnInit {
       this.noServiceFound = false; // Certifique-se de definir noServiceFound como false
     },
       (error) => {
-        console.error('Erro ao buscar dados.', error);
         this.noServiceByIdFound = true;
       });
   }
@@ -206,7 +200,6 @@ export class HomeComponent implements OnInit {
         statusFilterUrl += 'em_andamento';
         break;
       default:
-        console.error('Status inválido selecionado.');
         return;
     }
 
@@ -220,7 +213,6 @@ export class HomeComponent implements OnInit {
       }
     },
       (error) => {
-        console.error('Erro ao buscar dados.', error);
         this.noServiceFound = true;
       });
   }
@@ -253,8 +245,6 @@ export class HomeComponent implements OnInit {
           }
         },
         (error) => {
-          console.error('Erro ao buscar dados.', error);
-          console.log(serviceType)
           this.noServiceFound = true;
         }
       );
@@ -270,7 +260,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.fetchClient(order.id_cliente)
       this.fetchService(order.id_servico);
-      console.log(this.selectedService.status)
     }
   }
 
