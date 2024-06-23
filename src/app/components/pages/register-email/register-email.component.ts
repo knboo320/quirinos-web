@@ -19,7 +19,7 @@ export class RegisterEmailComponent {
   constructor(private http: HttpClient) { }
 
   postEmail() {
-    const url = 'http://localhost:3000/email/configurar'
+    const url = 'http://13.91.80.87:3000/email/configurar'
 
     const data = {
       email: this.email,
