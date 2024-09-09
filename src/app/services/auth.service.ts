@@ -7,7 +7,7 @@ import { Credentials } from '../models/auth.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/funcionarios/login'
+  private apiUrl = 'http://20.206.248.22:3000/funcionarios/login'
 
   constructor(private http: HttpClient) { }
 

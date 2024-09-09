@@ -9,7 +9,7 @@ export class ForgotPasswordService {
   constructor(private http: HttpClient) { }
 
   renewPass(cpf: number, newPass: string) {
-    const url = 'http://localhost:3000/funcionarios/esqueciSenha';
+    const url = 'http://20.206.248.22:3000/funcionarios/esqueciSenha';
     const body = {
       cpf: cpf,
       editar_senha: true,
