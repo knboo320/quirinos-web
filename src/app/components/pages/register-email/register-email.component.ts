@@ -19,7 +19,7 @@ export class RegisterEmailComponent {
   constructor(private http: HttpClient) { }
 
   postEmail() {
-    const url = 'http://20.206.248.22:3000/email/configurar'
+    const url = 'http://20.164.18.224:3000/email/configurar'
 
     const data = {
       email: this.email,
@@ -39,7 +39,7 @@ export class RegisterEmailComponent {
     this.leadingSpace = false;
     this.invalidEmail = false;
 
-    if(!this.email) {
+    if (!this.email) {
       this.emailMissing = true;
       return;
     } else if (this.email.startsWith(' ')) {
@@ -52,7 +52,7 @@ export class RegisterEmailComponent {
     } else if (this.email) {
       this.emailMissing = false;
 
-    } if(!this.senha) {
+    } if (!this.senha) {
       this.passMissing = true;
       return;
     } else if (this.senha.startsWith(' ')) {
@@ -62,7 +62,7 @@ export class RegisterEmailComponent {
     } else if (this.senha) {
       this.passMissing = false;
     }
-    
+
     this.http.post(url, data, { headers }).subscribe(
       (res) => {
         this.emailSuccess = true;

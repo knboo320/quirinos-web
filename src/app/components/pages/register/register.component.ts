@@ -6,7 +6,7 @@ import { PreviousUrlService } from 'src/app/services/previous-url.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
-})  
+})
 export class RegisterComponent implements OnInit {
 
   nome!: string;
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   postEmployee() {
-    const url = 'http://20.206.248.22:3000/funcionarios/cadastro'
+    const url = 'http://20.164.18.224:3000/funcionarios/cadastro'
 
     const data = {
       nome: this.nome,
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
     this.leadingSpace = false;
     this.generalError = false;
 
-    if(!this.nome) {
+    if (!this.nome) {
       this.nameMissing = true;
       return;
     } else if (this.nome.startsWith(' ')) {
@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
     } else if (!this.email.includes('@')) {
       this.invalidEmail = true;
       return;
-    } else if(this.email.startsWith(' ')) {
+    } else if (this.email.startsWith(' ')) {
       this.emailMissing = false;
       this.leadingSpace = true;
       return;
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
       this.leadingSpace = false;
 
 
-    } if(!this.senha) {
+    } if (!this.senha) {
       this.passMissing = true;
       return;
     } else if (this.senha.startsWith(' ')) {
@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
       this.passMissing = false;
       this.leadingSpace = false;
 
-    } if(!this.cpfString) {
+    } if (!this.cpfString) {
       this.cpfMissing = true;
       return;
     } else if (this.cpfString.length < 11) {
@@ -113,18 +113,18 @@ export class RegisterComponent implements OnInit {
     }
 
     this.http.post(url, data)
-    .subscribe(
-      (res) => {
-        this.registerSuccess = true;
-      },
-      (err) => {
-        if (err.status === 409) {
-          this.alreadyExist = true;
-        } else if (err.status === 500) {
-          this.generalError = true;
+      .subscribe(
+        (res) => {
+          this.registerSuccess = true;
+        },
+        (err) => {
+          if (err.status === 409) {
+            this.alreadyExist = true;
+          } else if (err.status === 500) {
+            this.generalError = true;
+          }
         }
-      }
-    )
+      )
   }
-  
+
 }

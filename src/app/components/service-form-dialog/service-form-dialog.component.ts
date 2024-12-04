@@ -22,7 +22,7 @@ export class ServiceFormDialogComponent {
   complemento!: string;
   cpf!: number;
   cpfString!: string;
-  id_cliente! : number;
+  id_cliente!: number;
   seguradora!: string;
   numero_da_assistencia!: number;
   numero_da_assistenciaString!: string;
@@ -52,12 +52,12 @@ export class ServiceFormDialogComponent {
   invalidAssistance: boolean = false;
   invalidEmail: boolean = false;
   generalError: boolean = false;
-  
+
   constructor(
     private http: HttpClient,
     private matDialog: MatDialog,
     private checkupData: CheckUpGetService
-    ) { }
+  ) { }
 
   register() {
 
@@ -76,20 +76,20 @@ export class ServiceFormDialogComponent {
     this.invalidEmail = false;
     this.generalError = false;
 
-    if(!this.seguradora) {
+    if (!this.seguradora) {
       this.insuranceMissing = true;
       return;
     } else if (this.seguradora.startsWith(' ')) {
       this.insuranceMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.seguradora) {
-      this.insuranceMissing = false; 
+    } else if (this.seguradora) {
+      this.insuranceMissing = false;
 
-    } if(!this.email_seguradora) {
+    } if (!this.email_seguradora) {
       this.insuranceEmailMissing = true;
       return;
-     }else if (!this.email_seguradora.includes('@')) {
+    } else if (!this.email_seguradora.includes('@')) {
       this.invalidEmail = true;
       return;
     } else if (this.email_seguradora.startsWith(' ')) {
@@ -99,7 +99,7 @@ export class ServiceFormDialogComponent {
     } else if (this.email_seguradora) {
       this.insuranceEmailMissing = false;
 
-    } if(!this.numero_da_assistenciaString) {
+    } if (!this.numero_da_assistenciaString) {
       this.assistanceMissing = true;
       return;
     } else if (isNaN(Number(this.numero_da_assistenciaString))) {
@@ -110,64 +110,64 @@ export class ServiceFormDialogComponent {
       this.assistanceMissing = false;
       this.invalidAssistance = false;
 
-    } if(!this.nome) {
+    } if (!this.nome) {
       this.nameMissing = true;
       return;
     } else if (this.nome.startsWith(' ')) {
       this.nameMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.nome) {
+    } else if (this.nome) {
       this.nameMissing = false;
 
-    } if(!this.endereco) {
+    } if (!this.endereco) {
       this.adressMissing = true;
       return;
     } else if (this.endereco.startsWith(' ')) {
       this.adressMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.endereco) {
+    } else if (this.endereco) {
       this.adressMissing = false;
 
-    } if(!this.bairro) {
+    } if (!this.bairro) {
       this.neighbourhoodMissing = true;
       return;
     } else if (this.bairro.startsWith(' ')) {
       this.neighbourhoodMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.bairro) {
+    } else if (this.bairro) {
       this.neighbourhoodMissing = false;
 
-    } if(!this.cidade) {
+    } if (!this.cidade) {
       this.cityMissing = true;
       return;
     } else if (this.cidade.startsWith(' ')) {
       this.cityMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.cidade) {
+    } else if (this.cidade) {
       this.cityMissing = false;
 
-    } if(!this.tipo_de_servico) {
+    } if (!this.tipo_de_servico) {
       this.typeMissing = true;
       return;
-    } else if(this.tipo_de_servico) {
+    } else if (this.tipo_de_servico) {
       this.typeMissing = false;
 
-    } if(!this.descricao_problema) {
+    } if (!this.descricao_problema) {
       this.descriptionMissing = true;
       return;
     } else if (this.descricao_problema.startsWith(' ')) {
       this.descriptionMissing = false;
       this.leadingSpace = true;
       return;
-    } else if(this.descricao_problema) {
+    } else if (this.descricao_problema) {
       this.descriptionMissing = false;
     }
- 
-    if(this.clienteEncontrado == null) {
+
+    if (this.clienteEncontrado == null) {
       this.postClient()
       this.postService()
     } else {
@@ -178,7 +178,7 @@ export class ServiceFormDialogComponent {
   }
 
   postClient() {
-    const clientUrl = 'http://20.206.248.22:3000/clientes/cadastro'
+    const clientUrl = 'http://20.164.18.224:3000/clientes/cadastro'
 
     const dataClient = {
       nome: this.nome,
@@ -205,14 +205,14 @@ export class ServiceFormDialogComponent {
         },
         (err) => {
           if (err.status === 500) {
-            this.generalError = true; 
+            this.generalError = true;
           }
         }
       );
   }
 
   postService() {
-    const serviceUrl = 'http://20.206.248.22:3000/servicos/criar'
+    const serviceUrl = 'http://20.164.18.224:3000/servicos/criar'
 
     const concatenatedData = this.checkupData.getConcatenatedData()
 
@@ -242,7 +242,7 @@ export class ServiceFormDialogComponent {
         },
         (err) => {
           if (err.status === 500) {
-            this.generalError = true; 
+            this.generalError = true;
           }
         }
       );
@@ -261,7 +261,7 @@ export class ServiceFormDialogComponent {
       headers = headers.set('Authorization', `Bearer ${token}`)
     }
 
-    const cpfURL = `http://20.206.248.22:3000/clientes/cpf/${this.cpfString}`
+    const cpfURL = `http://20.164.18.224:3000/clientes/cpf/${this.cpfString}`
 
     this.http.get(cpfURL, { headers }).subscribe(
       (cpfData: any) => {
@@ -279,8 +279,8 @@ export class ServiceFormDialogComponent {
 
   clientePreenchido() {
     if (this.clienteEncontrado) {
-        this.id_cliente = this.clienteEncontrado.dados_cliente.id_cliente
-        this.nome = this.clienteEncontrado.dados_cliente.nome,
+      this.id_cliente = this.clienteEncontrado.dados_cliente.id_cliente
+      this.nome = this.clienteEncontrado.dados_cliente.nome,
         this.cidade = this.clienteEncontrado.dados_cliente.cidade,
         this.endereco = this.clienteEncontrado.dados_cliente.endereco,
         this.bairro = this.clienteEncontrado.dados_cliente.bairro,
@@ -290,7 +290,7 @@ export class ServiceFormDialogComponent {
 
   limparCliente() {
     if (this.clienteEncontrado == null) {
-        this.id_cliente = 0,
+      this.id_cliente = 0,
         this.nome = '',
         this.cidade = '',
         this.endereco = '',
@@ -314,7 +314,7 @@ export class ServiceFormDialogComponent {
         this.tipo_de_servicos_selecionados.splice(index, 1);
       }
     }
-  
+
     // Verifica se o tipo "Outro" foi preenchido e o adiciona à lista
     if (this.outro_servico.trim() !== '') {
       let servicoFormatado = `Outros: ${this.outro_servico.trim().charAt(0).toUpperCase() + this.outro_servico.trim().slice(1)}`;
@@ -322,7 +322,7 @@ export class ServiceFormDialogComponent {
         this.tipo_de_servicos_selecionados.push(servicoFormatado);
       }
     }
-  
+
     // Atualiza a variável tipo_de_servico com os tipos selecionados
     this.tipo_de_servico = this.tipo_de_servicos_selecionados.join(', ');
 
