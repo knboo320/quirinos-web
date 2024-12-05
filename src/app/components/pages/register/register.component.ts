@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   postEmployee() {
-    const url = 'http://20.164.18.224:3000/funcionarios/cadastro'
+    const url = '/api/funcionarios/cadastro'
 
     const data = {
       nome: this.nome,
