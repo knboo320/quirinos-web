@@ -178,7 +178,7 @@ export class ServiceFormDialogComponent {
   }
 
   postClient() {
-    const clientUrl = 'http://20.164.18.224:3000/clientes/cadastro'
+    const clientUrl = 'https://tiago4014.c35.integrator.host/api/clientes/cadastro'
 
     const dataClient = {
       nome: this.nome,
@@ -212,7 +212,7 @@ export class ServiceFormDialogComponent {
   }
 
   postService() {
-    const serviceUrl = 'http://20.164.18.224:3000/servicos/criar'
+    const serviceUrl = 'https://tiago4014.c35.integrator.host/api/servicos/criar'
 
     const concatenatedData = this.checkupData.getConcatenatedData()
 
@@ -261,7 +261,7 @@ export class ServiceFormDialogComponent {
       headers = headers.set('Authorization', `Bearer ${token}`)
     }
 
-    const cpfURL = `http://20.164.18.224:3000/clientes/cpf/${this.cpfString}`
+    const cpfURL = `https://tiago4014.c35.integrator.host/api/clientes/cpf/${this.cpfString}`
 
     this.http.get(cpfURL, { headers }).subscribe(
       (cpfData: any) => {
