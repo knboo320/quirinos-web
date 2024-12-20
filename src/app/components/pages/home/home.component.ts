@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
     }
 
     // Adicionar os headers na requisição HTTP GET
-    this.httpClient.get(`http://20.164.18.224:3000/servicos/filtrar/data/${this.currentData}`, { headers })
+    this.httpClient.get(`https://tiago4014.c35.integrator.host/api/servicos/filtrar/data/${this.currentData}`, { headers })
       .subscribe(
         (response) => {
           this.responseData = response;
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchClient(idCliente: string) {
-    const url = `http://20.164.18.224:3000/clientes/id/${idCliente}`;
+    const url = `https://tiago4014.c35.integrator.host/api/clientes/id/${idCliente}`;
 
     // Ler o token do LocalStorage
     const token = localStorage.getItem('authToken');
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchService(idServico: string) {
-    const url = `http://20.164.18.224:3000/servicos/id/${idServico}`; // Substitua pelo seu URL de destino
+    const url = `https://tiago4014.c35.integrator.host/api/servicos/id/${idServico}`; // Substitua pelo seu URL de destino
     // Ler o token do LocalStorage
     const token = localStorage.getItem('authToken');
 
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    this.httpClient.get(`http://20.164.18.224:3000/servicos/filtrar/id/${this.serviceNumber}`, { headers }).subscribe((response) => {
+    this.httpClient.get(`https://tiago4014.c35.integrator.host/api/servicos/filtrar/id/${this.serviceNumber}`, { headers }).subscribe((response) => {
       this.responseData = response;
       this.noServiceFound = false; // Certifique-se de definir noServiceFound como false
     },
@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    let statusFilterUrl = 'http://20.164.18.224:3000/servicos/filtrar/status/';
+    let statusFilterUrl = 'https://tiago4014.c35.integrator.host/api/servicos/filtrar/status/';
 
     // Ler o token do LocalStorage
     const token = localStorage.getItem('authToken');
@@ -234,7 +234,7 @@ export class HomeComponent implements OnInit {
         headers = headers.set('Authorization', `Bearer ${token}`);
       }
 
-      const url = `http://20.164.18.224:3000/servicos/filtrar/tipo/${serviceType}`;
+      const url = `https://tiago4014.c35.integrator.host/api/servicos/filtrar/tipo/${serviceType}`;
       this.httpClient.get(url, { headers }).subscribe(
         (response) => {
           this.responseData = response;
@@ -255,7 +255,7 @@ export class HomeComponent implements OnInit {
     this.selectedService = order;
     if (this.selectedService.status === 'Concluído' || this.selectedService.status === 'Concluido') {
       const urlPdf = this.selectedService.pdf.url_pdf
-      window.open(`http://${urlPdf}`, '_blank')
+      window.open(urlPdf, '_blank')
       this.selectedService = null;
     } else {
       this.fetchClient(order.id_cliente)
